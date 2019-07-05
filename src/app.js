@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Token from './components/Token';
+import ExchangeRate from './components/ExchangeRate';
 import axios from 'axios';
 
 // import DEXAG from 'dexag-sdk';
 // const sdk = DEXAG.fromProvider(window.ethereum);
-
-// const App = () => {
-// useEffect(() => {});
-
-// const [inputAmount, setInputAmount] = useState('');
-// const [outputAmount, setOutputAmount] = useState('');
-// const [inputToken, setInputToken] = useState('ETH');
-// const [outputToken, setOutputToken] = useState('MKR');
 
 class App extends Component {
   state = {
@@ -20,6 +13,7 @@ class App extends Component {
     outputAmount: '',
     inputToken: 'ETH',
     outputToken: 'MKR',
+    price: null,
     loadingPrice: false,
   };
 
@@ -30,9 +24,21 @@ class App extends Component {
 
     try {
       const response = await axios.get(apiUrl);
-      const price = (response.data[0].price * amount).toFixed(4);
+      const price = Number(response.data[0].price).toFixed(4);
+      console.log(typeof price);
+      const outputAmount = (response.data[0].price * amount).toFixed(4);
+
+      // find the best price
+      // const best = await response.data.reduce((prev, curr) =>
+      //   prev.price < curr.price ? prev : curr,
+      // );
+
       if (from === 'input') {
-        this.setState({ outputAmount: price });
+        this.setState({
+          outputAmount,
+          price,
+          loadingPrice: false,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -43,8 +49,15 @@ class App extends Component {
     this.setState(
       {
         inputAmount: e.target.value,
+        loadingPrice: true,
       },
-      () => this.getPrice('input'),
+      () => {
+        if (this.state.inputAmount.length) {
+          this.getPrice('input');
+        } else {
+          this.setState({ outputAmount: '' });
+        }
+      },
     );
   };
 
@@ -55,7 +68,11 @@ class App extends Component {
   };
 
   handleInputTokenChange = token => {
-    this.setState({ inputToken: token }, () => this.getPrice('input'));
+    this.setState({ inputToken: token }, () => {
+      if (this.state.inputAmount.length) {
+        this.getPrice('input');
+      }
+    });
   };
 
   handleOutputTokenChange = token => {
@@ -63,40 +80,56 @@ class App extends Component {
   };
 
   render() {
+    const {
+      inputToken,
+      outputToken,
+      inputAmount,
+      outputAmount,
+      price,
+    } = this.state;
     return (
       <React.StrictMode>
         <div>
           <div className="form-wrapper">
             <form className="swap-form">
+              <div className="input-label">I want to trade</div>
               <div className="token-row">
                 <input
                   className="amount-field"
                   type="number"
-                  value={this.state.inputAmount}
+                  value={inputAmount}
                   placeholder="0.0"
                   onChange={this.handleInputChange}
                   min="0"
                 />
                 <Token
                   className="token-select"
-                  defaultToken={this.state.inputToken}
+                  defaultToken={inputToken}
                   changeToken={this.handleInputTokenChange}
                 />
               </div>
+              <div className="input-label">in exchange for</div>
               <div className="token-row">
                 <input
                   className="amount-field"
                   type="number"
-                  value={this.state.outputAmount}
+                  value={outputAmount}
                   placeholder="0.0"
                   onChange={this.handleOutputChange}
                 />
                 <Token
                   className="token-select"
-                  defaultToken={this.state.outputToken}
+                  defaultToken={outputToken}
                   changeToken={this.handleOutputTokenChange}
                 />
               </div>
+              {this.state.price && (
+                <ExchangeRate
+                  inputToken={inputToken}
+                  outputToken={outputToken}
+                  price={price}
+                />
+              )}
             </form>
           </div>
         </div>
