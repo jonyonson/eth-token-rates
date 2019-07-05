@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Token from './components/Token';
 import ExchangeRate from './components/ExchangeRate';
+import BeatLoader from 'react-spinners/BeatLoader';
 import axios from 'axios';
 
 // import DEXAG from 'dexag-sdk';
@@ -87,6 +88,7 @@ class App extends Component {
       outputAmount,
       price,
     } = this.state;
+
     return (
       <React.StrictMode>
         <div>
@@ -109,7 +111,7 @@ class App extends Component {
                 />
               </div>
               <div className="input-label">in exchange for</div>
-              <div className="token-row">
+              <div className="token-row ">
                 <input
                   className="amount-field"
                   type="number"
@@ -117,6 +119,12 @@ class App extends Component {
                   placeholder="0.0"
                   onChange={this.handleOutputChange}
                 />
+                {this.state.loadingPrice && (
+                  <div className="loading-price">
+                    <BeatLoader color={'#007cb2'} />
+                  </div>
+                )}
+
                 <Token
                   className="token-select"
                   defaultToken={outputToken}
