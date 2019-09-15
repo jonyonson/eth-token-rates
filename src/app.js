@@ -18,23 +18,22 @@ class App extends Component {
     loadingPrice: false,
   };
 
-  getPrice = async from => {
+  getPrice = async (source) => {
     const { inputToken, outputToken, inputAmount, outputAmount } = this.state;
-    const amount = from === 'input' ? +inputAmount : +outputAmount;
+    const amount = source === 'input' ? +inputAmount : +outputAmount;
     const apiUrl = `https://api.dex.ag/price?from=${inputToken}&to=${outputToken}&fromAmount=${amount}&dex=all`;
 
     try {
       const response = await axios.get(apiUrl);
       const price = Number(response.data[0].price).toFixed(4);
-      console.log(typeof price);
       const outputAmount = (response.data[0].price * amount).toFixed(4);
 
-      // find the best price
+      // Find the best price
       // const best = await response.data.reduce((prev, curr) =>
       //   prev.price < curr.price ? prev : curr,
       // );
 
-      if (from === 'input') {
+      if (source === 'input') {
         this.setState({
           outputAmount,
           price,
@@ -46,7 +45,7 @@ class App extends Component {
     }
   };
 
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     this.setState(
       {
         inputAmount: e.target.value,
@@ -62,13 +61,13 @@ class App extends Component {
     );
   };
 
-  handleOutputChange = e => {
+  handleOutputChange = (e) => {
     this.setState({ outputAmount: e.target.value }, () =>
       this.getPrice('output'),
     );
   };
 
-  handleInputTokenChange = token => {
+  handleInputTokenChange = (token) => {
     this.setState({ inputToken: token }, () => {
       if (this.state.inputAmount.length) {
         this.getPrice('input');
@@ -76,7 +75,7 @@ class App extends Component {
     });
   };
 
-  handleOutputTokenChange = token => {
+  handleOutputTokenChange = (token) => {
     this.setState({ outputToken: token }, () => this.getPrice('input'));
   };
 

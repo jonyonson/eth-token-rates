@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Exchange = props => {
+const Exchange = (props) => {
   const { inputToken, outputToken, price } = props;
   return (
     <div className="exchange-rate">
