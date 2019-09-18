@@ -27,9 +27,9 @@
     "sass": "^1.22.12"
   },
   "scripts": {
-    "clear-build-cache": "rm -rf .cache/ dist/",
+    "clear-build-cache": "rm -rf .cache/ dist/ public/",
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/index.html --out-dir public/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jonathan Taylor <taylor.jonathan.craig@gmail.com>",
