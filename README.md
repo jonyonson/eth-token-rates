@@ -15,13 +15,13 @@ Open [http://localhost:1234](http://localhost:1234) to view it in the browser.
 
 ## `yarn build`
 
-Runs `parcel build src/index.html --out-dir public/`
+Runs `parcel build src/index.html`
 
 Builds the app for production to the `dist` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 ## `yarn clear-build-cache`
 
-Runs `rm -rf .cache/ public/`
+Runs `rm -rf .cache/ dist/`
 
 Removes the `.cache` and `public` folders.
