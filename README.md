@@ -24,4 +24,4 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 Runs `rm -rf .cache/ dist/`
 
-Removes the `.cache` and `public` folders.
+Removes the `.cache` and `dist` folders.
