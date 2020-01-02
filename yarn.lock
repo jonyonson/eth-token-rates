@@ -4969,10 +4969,10 @@ react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
 
-react-spinners@^0.7.0:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.7.1.tgz#5d659391bf3ba722750171bb02a3130034cad15d"
-  integrity sha512-yNXk5WUHcuc+qLShDdueGMlqSdV9H0QvgNlnsSFPjbHQVCfQZFrnnkPUIX+ZfUKIesRoIdnO/GAqr4Fwu8EPxQ==
+react-spinners@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.8.0.tgz#a64f5bc4c301f463841cf75ed67d6f64a365997c"
+  integrity sha512-xeoRNn4YlsqKaqBm0SgCrRt3sI99CGFraZbw9noD9RLKwumEJ55e9dkXjdEbZgJUmPymQCDrsazQe79DoFd9IQ==
   dependencies:
     "@emotion/core" "^10.0.15"
 
