@@ -8,7 +8,7 @@
     "dexag-sdk": "^2.1.16",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-spinners": "^0.7.0"
+    "react-spinners": "^0.8.0"
   },
   "devDependencies": {
     "@babel/core": "7.8.3",
