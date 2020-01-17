@@ -24,7 +24,7 @@
     "eslint-plugin-react-hooks": "2.3.0",
     "parcel-bundler": "1.12.4",
     "prettier": "1.19.1",
-    "sass": "1.24.4"
+    "sass": "1.25.0"
   },
   "scripts": {
     "clear-build-cache": "rm -rf .cache/ dist/",
